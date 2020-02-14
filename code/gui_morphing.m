@@ -6,7 +6,7 @@ clear all;
 clearvars;
 % add path to dependencies
 addpath('cbrewer/');
-addpath('/Users/neeks/Desktop/Documents/work/code/matlab_codes/others_codes/legacy_STRAIGHT/src'); % download from https://github.com/HidekiKawahara/legacy_STRAIGHT
+addpath('misc/legacy_STRAIGHT/src'); % download from https://github.com/HidekiKawahara/legacy_STRAIGHT
 
 % SIMPLE_GUI2 Select a data set from the pop-up menu, then
 % click one of the plot-type push buttons. Clicking the button
