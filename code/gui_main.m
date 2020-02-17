@@ -32,6 +32,17 @@ f.Name = 'SPEESM: a prism for speech?';
 % Move the window to the center of the screen.
 movegui(f,'center')
 
+store_path = './data/analy_syn/';
+store_path_F0 = './data/f0_tracks/';
+
+if ~exist(store_path, 'dir')
+   mkdir(store_path)
+end
+    
+if ~exist(store_path_F0, 'dir')
+   mkdir(store_path_F0)
+end
+
 % Make the window visible.
 f.Visible = 'on';
     %%%%%

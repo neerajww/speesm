@@ -485,8 +485,10 @@ fpanel_1 = figure('Visible','off','Position',[360,800,400,400],'MenuBar','None',
     function saveSound_Callback(source,eventdata)
         for m = 1:qhd.ndivs
             for n = 1:qhd.ndivs
-                audiowrite([store_path mqhd{1}.filename(1:end-4) '_' mqhd{2}.filename(1:end-4) ...
-                    '_grid_' num2str(m) '_' num2str(n) '.wav'],qhd.interp_sigs{m,n}.sig/max(abs(qhd.interp_sigs{m,n}.sig)),qhd.Fs);
+                if m ==n
+                    audiowrite([store_path mqhd{1}.filename(1:end-4) '_' mqhd{2}.filename(1:end-4) ...
+                        '_grid_' num2str(m) '_' num2str(n) '.wav'],qhd.interp_sigs{m,n}.sig/max(abs(qhd.interp_sigs{m,n}.sig)),qhd.Fs);
+                end
             end
         end
         clear sound;
