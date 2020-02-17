@@ -368,10 +368,19 @@ fpanel_1 = figure('Visible','off','Position',[360,800,400,400],'MenuBar','None',
             disp('Extracting F0 track ....');
             [f0] = exstraightsource(temp,8e3);
             disp('Extracted F0 track.');
+            t1 = (0:length(f0)-1)/8e3;
+            f0 = interp1(t1,f0,t,'linear','extrap');
+    %         f0 = resample(f0,Fs,8e3);
+            f0(f0<25) = 25;
+            f0(f0>350) = 350;
+            if length(f0)>length(x)
+                f0 = f0(1:length(x));
+            else
+                x = x(1:length(x));
+            end
+
             % equate Fs of qhd.f0 to qhd.Fs
-            qhd.f0track{i} = resample(f0,qhd.Fs,8e3);
-            qhd.f0track{i}(qhd.f0track{i}<25) = 25;
-%             qhd.f0track{i}(qhd.f0track{i}>350) = 350;
+            qhd.f0track{i} = f0;
             len = length(qhd.f0track{i});
             qhd.taxis{i} = qhd.taxis{i}(1:len);
             qhd.sig{i} = qhd.sig{i}(1:len);
