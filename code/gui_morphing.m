@@ -6,7 +6,7 @@ clear all;
 clearvars;
 % add path to dependencies
 addpath('cbrewer/');
-addpath('misc/legacy_STRAIGHT/src'); % download from https://github.com/HidekiKawahara/legacy_STRAIGHT
+addpath('misc/legacy_STRAIGHT/src/'); % download from https://github.com/HidekiKawahara/legacy_STRAIGHT
 
 % SIMPLE_GUI2 Select a data set from the pop-up menu, then
 % click one of the plot-type push buttons. Clicking the button
@@ -369,14 +369,15 @@ fpanel_1 = figure('Visible','off','Position',[360,800,400,400],'MenuBar','None',
             [f0] = exstraightsource(temp,8e3);
             disp('Extracted F0 track.');
             t1 = (0:length(f0)-1)/8e3;
+            t =  (0:length(qhd.sig{i})-1)/qhd.Fs;
             f0 = interp1(t1,f0,t,'linear','extrap');
     %         f0 = resample(f0,Fs,8e3);
             f0(f0<25) = 25;
             f0(f0>350) = 350;
-            if length(f0)>length(x)
-                f0 = f0(1:length(x));
+            if length(f0)>length(qhd.sig{i})
+                f0 = f0(1:length(qhd.sig{i}));
             else
-                x = x(1:length(x));
+                qhd.sig{i} = qhd.sig{i}(1:length(f0));
             end
 
             % equate Fs of qhd.f0 to qhd.Fs
